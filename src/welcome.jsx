@@ -57,7 +57,7 @@ function Welcome() {
           }
         }}
       />
-      <img className="mx-auto w-16 my-16 lg:my-32 opacity-10" src={logoAsset.url} />
+      <img className="mx-auto w-16 my-16 lg:my-32 opacity-10 dark:invert" src={logoAsset.url} />
       <div className="flex flex-wrap mb-8 lg:mb-16">
         {page.gallery.imagesCollection.items.map(imageAsset => (
           <a href={imageAsset.url} className="w-1/3 p-1" key={imageAsset.url}><img src={imageAsset.url} /></a>

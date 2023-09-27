@@ -53,7 +53,7 @@ function Page() {
           },
         }}
       />
-      <img className="mx-auto w-16 my-16 lg:my-32 opacity-10" src={logoAsset.url} />
+      <img className="mx-auto w-16 my-16 lg:my-32 opacity-10 dark:invert" src={logoAsset.url} />
   </div>
   )
 }
