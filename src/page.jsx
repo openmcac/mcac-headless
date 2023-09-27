@@ -1,13 +1,14 @@
 import { useQuery, gql } from '@apollo/client';
 import ReactMarkdown from "react-markdown"
+import { useLoaderData } from "react-router-dom"
 
-function Page() {
+export const loader = client => async ({ params }) => {
   const GET_PAGE = gql`
   {
     asset(id: "32m5j3o83r5vqbgcqbcF0") {
       url
     },
-    pageCollection(where: {slug: "giving"}, limit: 1) {
+    pageCollection(where: {slug: "${params.slug}"}, limit: 1) {
       items {
         title
         content
@@ -15,11 +16,15 @@ function Page() {
     }
   }
   `
+  return client.query({ query: GET_PAGE });
+}
 
-  const { loading, error, data } = useQuery(GET_PAGE);
+function Page() {
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  const { loading, error, data } = useLoaderData()
+
+  if (loading) return
+  if (error) return
 
   const page = data.pageCollection.items[0]
   const logoAsset = data.asset
@@ -43,8 +48,8 @@ function Page() {
             return <a className="text-cyan-600 hover:text-cyan-400" {...rest} />
           },
           ol(props) {
-            const { node, ...rest } = props
-            return <ol className="list-decimal list-outside pl-8 mb-2" {...rest} />
+            const { node, ordered, ...rest } = props
+            return <ol className="list-decimal list-outside pl-8 mb-2" ordered="ordered" {...rest} />
           },
         }}
       />

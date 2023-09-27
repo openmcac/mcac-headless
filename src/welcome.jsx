@@ -28,8 +28,8 @@ const GET_WELCOME_PAGE = gql`
 function Welcome() {
   const { loading, error, data } = useQuery(GET_WELCOME_PAGE);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return
+  if (error) return
 
   const page = data.pageCollection.items[0]
   const logoAsset = data.asset
