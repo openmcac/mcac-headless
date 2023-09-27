@@ -8,9 +8,9 @@ import Welcome from "./welcome"
 import Page, { loader as pageLoader } from "./page"
 
 const link = createHttpLink({
-  uri: 'https://graphql.contentful.com/content/v1/spaces/k0k2fkm2tlhi',
+  uri: `https://graphql.contentful.com/content/v1/spaces/${import.meta.env.VITE_CONTENTFUL_SPACE_ID}`,
   headers: {
-    authorization: `Bearer j1Tm5eG5-2o9CfhXPqjhITe3RqboWfHNJqMXvjPSZnc`,
+    authorization: `Bearer ${import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN}`,
   },
 });
 
