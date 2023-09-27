@@ -1,5 +1,8 @@
 import { useQuery, gql } from '@apollo/client';
 import ReactMarkdown from "react-markdown"
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { useState } from "react"
 
 const GET_WELCOME_PAGE = gql`
 {
@@ -58,13 +61,35 @@ function Welcome() {
         }}
       />
       <img className="mx-auto w-16 my-16 lg:my-32 opacity-10 dark:invert" src={logoAsset.url} />
-      <div className="flex flex-wrap mb-8 lg:mb-16">
-        {page.gallery.imagesCollection.items.map(imageAsset => (
-          <a href={imageAsset.url} className="w-1/3 p-1" key={imageAsset.url}><img src={imageAsset.url} /></a>
-        ))}
-      </div>
+      <div className="mb-8 lg:mb-16"><Gallery gallery={page.gallery} /></div>
   </div>
   )
 }
 
+function Gallery({ gallery }) {
+  const [index, setIndex] = useState(-1)
+
+  return (
+    <>
+      <div className="flex flex-wrap">
+        {gallery.imagesCollection.items.map((imageAsset, index) => (
+          <span className="p-1 w-1/3">
+            <img key={imageAsset.url}
+              src={imageAsset.url}
+              className="rounded"
+              onClick={() => setIndex(index)} />
+          </span>
+        ))}
+      </div>
+
+      <Lightbox
+        index={index}
+        slides={gallery.imagesCollection.items.map(i => ({ src: i.url }))}
+        open={index >= 0}
+        close={() => setIndex(-1)}
+      />
+    </>
+    
+  )
+}
 export default Welcome
