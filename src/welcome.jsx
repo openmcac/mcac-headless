@@ -46,6 +46,14 @@ function Welcome() {
             const { node, ...rest } = props
             return <h2 className="mb-4 lg:mb-8 text-2xl lg:text-3xl leading-relaxed" {...rest} />
           },
+          h3(props) {
+            const { node, children, ...rest } = props
+            return (
+              <h3 className="mt-8 mb-2 lg:mt-16 lg:mb-4" {...rest}>
+                <span className="bg-cyan-500 p-2 rounded font-bold text-white text-xs uppercase lg:text-base">{children}</span>
+              </h3>
+            )
+          },
           p(props) {
             const { node, ...rest } = props
             return <p className="mb-2 text-xl lg:text-2xl" {...rest} />
@@ -73,8 +81,8 @@ function Gallery({ gallery }) {
     <>
       <div className="flex flex-wrap">
         {gallery.imagesCollection.items.map((imageAsset, index) => (
-          <span className="p-1 w-1/3">
-            <img key={imageAsset.url}
+          <span className="p-1 w-1/3" key={imageAsset.url}>
+            <img 
               src={imageAsset.url}
               className="rounded"
               onClick={() => setIndex(index)} />
